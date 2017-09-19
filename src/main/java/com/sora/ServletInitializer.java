@@ -1,4 +1,4 @@
-package com.sora.springboot_demo_01;
+package com.sora;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;

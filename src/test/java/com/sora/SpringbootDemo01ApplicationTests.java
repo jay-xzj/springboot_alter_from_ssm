@@ -1,4 +1,4 @@
-package com.sora.springboot_demo_01;
+package java.com.sora;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

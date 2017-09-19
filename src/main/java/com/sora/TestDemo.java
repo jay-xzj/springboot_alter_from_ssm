@@ -1,6 +1,7 @@
-package com.sora.springboot_demo_01;
+package com.sora;
 
-import com.sora.springboot_demo_01.com.sora.pojo.User;
+
+import com.sora.pojo.User;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,11 +30,11 @@ public class TestDemo {
 
     // @PathVariable 获得请求url中的动态参数
     @RequestMapping(value = "/get/{id}/{name}")
-    public User getUser(@PathVariable int id, @PathVariable String name) {
+    public User getUser(@PathVariable long id, @PathVariable String name) {
         User user = new User();
         user.setId(id);
         user.setName(name);
-        user.setDate(new Date());
+        user.setCreated(new Date());
         return user;
     }
 

@@ -1,0 +1,43 @@
+# 端口配置
+server:
+  port: 8080
+
+# 数据库连接配置
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3380/usermanage?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+
+# Mybatis
+mybatis:
+  type-aliases-package: com.ads.model
+  config-locations: classpath:/mybatis/mybatis-config.xml
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+
+
+
+#        jpa:
+#        properties:
+#        hibernate:
+#        hbm2ddl:
+#        auto: update
+#
+#        rabbitmq:
+#        host: 115.29.105.167
+#        port: 5672
+#        username: guest
+#        password: 123456
+#        redis:
+#        host: 115.29.105.167
+#        port: 36379
+#        password: Hjb[rd]PassIn.167
+#        timeout: 3600
+#
