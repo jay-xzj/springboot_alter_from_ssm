@@ -1,0 +1,24 @@
+ datasource:
+    type: ${spring.datasource.type}
+    url: ${spring.datasource.url}
+    username: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    driverClassName: ${spring.datasource.driverClassName}
+    initialSize: ${spring.datasource.initialSize}
+    minIdle: ${spring.datasource.minIdle}
+    maxActive: ${spring.datasource.maxActive}
+    maxWait: ${spring.datasource.maxWait}
+    validationQuery: ${spring.datasource.validationQuery}
+    testOnBorrow: ${spring.datasource.testOnBorrow}
+    testOnReturn: ${spring.datasource.testOnReturn}
+    testWhileIdle: ${spring.datasource.testWhileIdle}
+    minEvictableIdleTimeMillis: ${spring.datasource.minEvictableIdleTimeMillis}
+    timeBetweenEvictionRunsMillis: ${spring.datasource.timeBetweenEvictionRunsMillis}
+    removeAbandoned: ${spring.datasource.removeAbandoned}
+    removeAbandonedTimeout: ${spring.datasource.removeAbandonedTimeout}
+    poolPreparedStatements: ${spring.datasource.poolPreparedStatements}
+    maxPoolPreparedStatementPerConnectionSize: ${spring.datasource.maxPoolPreparedStatementPerConnectionSize}
+    logAbandoned: ${spring.datasource.logAbandoned}
+    filters: ${spring.datasource.filters}
+    loginUsername: ${spring.datasource.loginUsername}
+    loginPassword: ${spring.datasource.loginPassword}
