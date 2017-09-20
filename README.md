@@ -5,7 +5,7 @@
 1.SpringBoot
 2.Mybatis
 3.JQuery-easyui(后面会改成Boot-Strap)
-等等。。。
+4.PageHelper3.x.x version
 
 ## 欢迎技术交流
 e-mail: xzj_thrive@126.com
