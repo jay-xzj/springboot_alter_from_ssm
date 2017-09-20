@@ -7,21 +7,31 @@ import com.sora.pojo.User;
 import com.sora.service.UserService;
 import com.sora.vo.DataGridResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import sun.misc.Request;
 
 
 @Controller
 @RequestMapping("user")
 public class UserController {
+
+	@Value("${application.hello:Sora}")
+	private String name;
 	
 	@Autowired
 	private UserService userService;
-	
+
+	@RequestMapping(value = "/user/{name}",method = RequestMethod.GET)
+	public ModelAndView HelloFtl(@PathVariable("name")String name,ModelAndView mv){
+		User user = this.userService.findUserByUsername(name);
+		mv.addObject("user",user);
+		mv.setViewName("hello");
+		return mv;
+	}
+
 	/*
 	 * 跳转到用户列表页面
 	 */
@@ -63,6 +73,8 @@ public class UserController {
 		}
 		return map;
 	}
+
+
 	
 	/**
 	 * 报表导出

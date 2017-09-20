@@ -1,0 +1,35 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	
+	<!-- 初始化SqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 配置连接池信息 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 设置全局配置文件的位置 -->
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+		<!-- 配置Mapper映射文件地址 -->
+		<property name="mapperLocations" value="classpath:mybatis/mappers/**/*Mapper.xml"/>
+		<!-- 别名扫描包 -->
+		<property name="typeAliasesPackage" value="cn.itcast.usermanage.pojo"/>
+	</bean>
+	
+	 <!--配置Mapper对象-->
+	 <bean class="org.mybatis.spring.mapper.MapperFactoryBean">
+		 <!--配置SqlSessionFactory-->
+		 <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		 <!--指定要初始化的Mapper接口-->
+		 <property name="mapperInterface" value="cn.itcast.usermanage.mapper.UserMapper" />
+	 </bean>
+	
+	<!-- 配置Mapper扫描包，不需要配置SQLSessionFactory，除非你有多个 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	 	<!-- 配置要扫描的Mapper接口包 -->
+		<property name="basePackage" value="cn.itcast.usermanage.mapper" />
+	</bean>
+</beans>

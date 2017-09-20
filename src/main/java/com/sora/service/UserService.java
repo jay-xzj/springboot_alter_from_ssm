@@ -7,6 +7,7 @@ import com.sora.mapper.UserMapper;
 import com.sora.pojo.User;
 import com.sora.vo.DataGridResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,4 +38,8 @@ public class UserService {
 		this.userMapper.insertUser(user);
 	}
 
+	public User findUserByUsername(String name) {
+		User user = userMapper.findUserByUsername(name);
+		return user;
+	}
 }

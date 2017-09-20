@@ -2,7 +2,43 @@
 spring:
     profiles:
         active: dev
+    # FreeMarker数字格式
+    freemarker:
+      settings:
+        number_format: 0.##
+      template-loader-path: classpath:/templates
+      cache: false
+      charset: utf-8
+      check-template-location: true
+      content-type: text/html
+      expose-request-attributes: true
+      expose-session-attributes: true
+      request-context-attribute: request
+      suffix: ftl
+
+    http:
+      encoding:
+        charset: UTF-8
+        enabled: true
+        force: true
+
+    messages:
+      encoding: UTF-8
+
+banner:
+  charset: UTF-8
+
+server:
+  tomcat:
+    uri-encoding: UTF-8
+
+
+
+
 
 # 应用自定义配置
-logging:
-  config: application-dev.yml
+#logging:
+#  config:
+#    classpath: application-dev.yml
+#    file: ./application-dev.yml
+#    application-dev.yml

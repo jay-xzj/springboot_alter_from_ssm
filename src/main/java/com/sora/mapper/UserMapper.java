@@ -3,11 +3,15 @@ package com.sora.mapper;
 
 
 import com.sora.pojo.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
+@Repository
 public interface UserMapper {
 	/**
 	 * 根据ID来查询用户
@@ -36,13 +40,22 @@ public interface UserMapper {
 	/**
 	 * 查询全部用户
 	 */
+//	@Select("SELECT * FROM  tb_user;")
 	List<User> queryUserList();
 
 	/**
 	 * 新增用户
 	 * @param user
 	 */
+//	@Insert("INSERT INTO tb_user VALUES (null,#{userName},#{password},#{name},#{age},#{sex},#{birthday},now(),now());")
 	void insertUser(User user);
 
 
+	/**
+	 * 查询单个用户
+	 * @param name
+	 * @return
+	 */
+//	@Select("SELECT * FROM  tb_user WHERE name = #{name};")
+	User findUserByUsername(String name);
 }

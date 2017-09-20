@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.sora.mapper.UserMapper">
+
+    <!-- type为实体类User，包名已经配置，可以直接写类名 -->
+    <resultMap id="userMap" type="com.sora.bean.User">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="phone" column="phone" />
+        <result property="email" column="email" />
+        <result property="updated" column="updated" />
+        <result property="created" column="created" />
+    </resultMap>
+
+    <select id="findUserByUsername" resultMap="userMap"  parameterType="java.lang.String">
+        SELECT  *
+        FROM  tb_user
+        WHERE  username = #{name}
+    </select>
+
+</mapper>
