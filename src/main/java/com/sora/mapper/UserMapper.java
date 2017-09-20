@@ -3,15 +3,15 @@ package com.sora.mapper;
 
 
 import com.sora.pojo.User;
-import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
 
 @Repository
+@Mapper
 public interface UserMapper {
 	/**
 	 * 根据ID来查询用户
@@ -26,7 +26,7 @@ public interface UserMapper {
 	 * 
 	 * @return
 	 */
-	// Integer queryTotalCount();
+//	 Integer queryTotalCount();
 
 	/**
 	 * 分页查询用户
@@ -35,7 +35,7 @@ public interface UserMapper {
 	 * @param rows
 	 * @return
 	 */
-	// List<User> queryUserListByPage(@Param("start") Integer start, @Param("rows") Integer rows);
+//	 List<User> queryUserListByPage(@Param("start") Integer start, @Param("rows") Integer rows);
 	
 	/**
 	 * 查询全部用户

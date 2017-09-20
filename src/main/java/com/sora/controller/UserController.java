@@ -37,23 +37,33 @@ public class UserController {
 	 */
 	@RequestMapping("users")
 	public String toUserList(){
-		return "users";
+		return "user";
+	}//这边return的字符串必须和templates里面的ftl文件名一样才能映射到
+
+
+	/**
+	 * 分页查询 ： 访问user/users之后，在userList表单中再次发出user/list的请求
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@RequestMapping(value="list", method=RequestMethod.POST)
+	@ResponseBody
+	public DataGridResult queryUserList(
+			@RequestParam(value="page", defaultValue = "1")Integer page,
+			@RequestParam(value="rows", defaultValue = "5")Integer rows
+	){
+		// 查询service，获取结果
+		return this.userService.queryUserList(page,rows);
 	}
+
 	// 跳转到新增页面
 	@RequestMapping("user-add")
 	public String toUserAdd(){
 		return "user-add";
 	}
 	
-	@RequestMapping(value="list", method=RequestMethod.POST)
-	@ResponseBody
-	public DataGridResult queryUserList(
-			@RequestParam(value="page", defaultValue = "1")Integer page,
-			@RequestParam(value="rows", defaultValue = "5")Integer rows
-			){
-		// 查询service，获取结果
-		return this.userService.queryUserList(page,rows);
-	}
+
 	
 	
 	

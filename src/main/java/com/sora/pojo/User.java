@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 public class User implements Serializable{
 
 	private static final long serialVersionUID = 1L;

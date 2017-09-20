@@ -6,7 +6,7 @@
 <mapper namespace="com.sora.mapper.UserMapper">
 
     <!-- type为实体类User，包名已经配置，可以直接写类名 -->
-    <resultMap id="userMap" type="com.sora.bean.User">
+    <resultMap id="userMap" type="com.sora.pojo.User">
         <id property="id" column="id" />
         <result property="username" column="username" />
         <result property="password" column="password" />
@@ -21,5 +21,41 @@
         FROM  tb_user
         WHERE  username = #{name}
     </select>
+
+    <select id="queryUserById" resultType="User">
+        SELECT * FROM tb_user WHERE id = #{id}
+    </select>
+
+    <!-- 查询总条数信息 -->
+    <select id="queryTotalCount" resultType="Integer">
+        SELECT COUNT(*) FROM tb_user
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryUserListByPage" resultType="User">
+        SELECT * FROM tb_user LIMIT #{start},#{rows}
+    </select>
+
+    <select id="queryUserList" resultType="User">
+        SELECT * FROM tb_user
+    </select>
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO tb_user (
+        id, user_name, password, name, age, sex, birthday, created, updated
+        )
+        VALUES
+        (
+        NULL,
+        #{userName},
+        #{password},
+        #{name},
+        #{age},
+        #{sex},
+        #{birthday},
+        NOW(),
+        NOW()
+        );
+    </insert>
 
 </mapper>

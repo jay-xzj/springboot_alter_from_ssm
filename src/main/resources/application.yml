@@ -14,7 +14,7 @@ spring:
       expose-request-attributes: true
       expose-session-attributes: true
       request-context-attribute: request
-      suffix: ftl
+#      suffix: ftl  不用加，加了报错，不加会自动去templates里面找ftl结尾的freemarker文件
 
     http:
       encoding:
