@@ -8,5 +8,5 @@
 4.PageHelper3.x.x version  <br/>
 
 ## 欢迎技术交流
-e-mail: xzj_thrive@126.com
+e-mail: xzj_thrive@126.com  <br/>
 blog: http://www.cnblogs.com/ss-coding/
