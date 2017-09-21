@@ -48,7 +48,7 @@ public interface UserMapper {
 	 * @param user
 	 */
 //	@Insert("INSERT INTO tb_user VALUES (null,#{userName},#{password},#{name},#{age},#{sex},#{birthday},now(),now());")
-	void insertUser(User user);
+	Integer insertUser(User user);
 
 
 	/**
@@ -58,4 +58,6 @@ public interface UserMapper {
 	 */
 //	@Select("SELECT * FROM  tb_user WHERE name = #{name};")
 	User findUserByUsername(String name);
+
+	Integer deleteUserById(Long id);
 }

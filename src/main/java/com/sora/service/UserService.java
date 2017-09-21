@@ -34,12 +34,31 @@ public class UserService {
 		return new DataGridResult(pageInfo.getTotal(), pageInfo.getList());
 	}
 
-	public void insertUser(User user) {
-		this.userMapper.insertUser(user);
+	public Integer insertUser(User user) {
+		Integer status = this.userMapper.insertUser(user);
+		System.out.println(status);
+		return status;
 	}
 
 	public User findUserByUsername(String name) {
 		User user = userMapper.findUserByUsername(name);
 		return user;
+	}
+
+	public int deleteUserByIds(List<Long> ids) {
+		int size = ids.size();
+		int count = 0;
+		//1:完全成功;2:部分成功;0:完全不成功
+		for (Long id :
+				ids) {
+			this.userMapper.deleteUserById(id);
+			count++;
+		}
+		if (count != 0){
+			return size==count?1:2;
+		}else{
+			return 0;
+		}
+
 	}
 }

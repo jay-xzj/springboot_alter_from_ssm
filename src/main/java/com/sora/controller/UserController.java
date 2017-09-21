@@ -1,11 +1,13 @@
 package com.sora.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.sora.pojo.User;
 import com.sora.service.UserService;
 import com.sora.vo.DataGridResult;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -20,7 +22,7 @@ public class UserController {
 
 	@Value("${application.hello:Sora}")
 	private String name;
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -62,20 +64,20 @@ public class UserController {
 	public String toUserAdd(){
 		return "user-add";
 	}
-	
 
-	
-	
-	
 	@RequestMapping("save")
 	@ResponseBody
 	public Map<String,Integer> saveUser(User user){
 		Map<String,Integer> map = new HashMap<>();
 		try {
-			this.userService.insertUser(user);
-			// TODO 完善逻辑判断是否添加成功
-			// 新增成功就返回200
-			map.put("status", 200);
+			Integer flag = this.userService.insertUser(user);
+			//判断，插入成功返回改变记录数，不成功为0
+			if (flag>0) {
+				// 新增成功就返回200
+				map.put("status", 200);
+				return map;
+			}
+			map.put("status", 500);
 		} catch (Exception e) {
 			e.printStackTrace();
 			// 新增失败就返回500
@@ -84,7 +86,25 @@ public class UserController {
 		return map;
 	}
 
-
+	@RequestMapping("delete")
+	@ResponseBody
+	public Map<String,Integer> deleteUser(@RequestParam List<Long> ids){
+		Map<String,Integer> map = new HashMap<>();
+		try {
+			int flag = this.userService.deleteUserByIds(ids);
+			if (flag == 1){
+				map.put("status", 200);
+            }else if (flag == 2){
+				map.put("status", 505);
+			}else{
+				map.put("status", 500);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("status", 500);
+		}
+		return map;
+	}
 	
 	/**
 	 * 报表导出

@@ -85,11 +85,18 @@
             $.messager.confirm('确认','确定删除ID为 '+ids+' 的会员吗？',function(r){
                 if (r){
                     $.post("/user/delete",{'ids':ids}, function(data){
-
-                        console.log("data : "+data);
-                        data = "("+data+")";
+                        console.log("data : "+data.status);
+//                        data = "["+data+"]";
                         if(data.status == 200){
                             $.messager.alert('提示','删除会员成功!',undefined,function(){
+                                $("#userList").datagrid("reload");
+                            });
+                        }else if(data.status == 505){
+                            $.messager.alert('提示','删除会员部分成功!',undefined,function(){
+                                $("#userList").datagrid("reload");
+                            });
+                        }else{
+                            $.messager.alert('提示','删除会员失败!',undefined,function(){
                                 $("#userList").datagrid("reload");
                             });
                         }

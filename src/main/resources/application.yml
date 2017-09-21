@@ -33,9 +33,6 @@ server:
     uri-encoding: UTF-8
 
 
-
-
-
 # 应用自定义配置
 #logging:
 #  config:

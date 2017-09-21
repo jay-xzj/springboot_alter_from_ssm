@@ -7,7 +7,7 @@ debug: true
 spring:
   datasource:
 #    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/usermanage?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+    url: jdbc:mysql://localhost:3380/usermanage?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver

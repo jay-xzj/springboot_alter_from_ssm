@@ -40,7 +40,12 @@
         SELECT * FROM tb_user
     </select>
 
-    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    <delete id="deleteUserById" parameterType="java.lang.Long">
+      DELETE FROM tb_user
+        WHERE id=#{id}
+    </delete>
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO tb_user (
         id, user_name, password, name, age, sex, birthday, created, updated
         )
