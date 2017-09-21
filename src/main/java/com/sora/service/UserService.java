@@ -61,4 +61,8 @@ public class UserService {
 		}
 
 	}
+
+	public int updateUser(User user) {
+		return this.userMapper.updateUserById(user.getId());
+	}
 }

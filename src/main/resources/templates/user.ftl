@@ -30,7 +30,11 @@
     </table>
 </div>
 <div id="userAdd" class="easyui-window" title="新增会员"
-     data-options="modal:true,closed:true,iconCls:'icon-save',href:'/page/user-add'" style="width:500px;height:390px;padding:10px;">
+           data-options="modal:true,closed:true,iconCls:'icon-save',href:'/page/user-add'" style="width:500px;height:390px;padding:10px;">
+    The window content.
+</div>
+<div id="userModify" class="easyui-window" title="修改会员信息"
+     data-options="modal:true,closed:true,iconCls:'icon-save',href:'/page/user-modify'" style="width:500px;height:390px;padding:10px;">
     The window content.
 </div>
 <script type="text/javascript">
@@ -71,7 +75,7 @@
         text:'编辑',
         iconCls:'icon-edit',
         handler:function(){
-            $.messager.alert('提示','该功能由学员自己实现!');
+            $('#userModify').window('open');
         }
     },{
         text:'删除',

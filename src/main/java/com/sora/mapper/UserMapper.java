@@ -60,4 +60,6 @@ public interface UserMapper {
 	User findUserByUsername(String name);
 
 	Integer deleteUserById(Long id);
+
+    Integer updateUserById(Long id);
 }

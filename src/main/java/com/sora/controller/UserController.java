@@ -65,6 +65,12 @@ public class UserController {
 		return "user-add";
 	}
 
+    // 跳转到新增页面
+    @RequestMapping("user-modify")
+    public String toUserModify(){
+        return "user-modify";
+    }
+
 	@RequestMapping("save")
 	@ResponseBody
 	public Map<String,Integer> saveUser(User user){
@@ -105,8 +111,30 @@ public class UserController {
 		}
 		return map;
 	}
-	
-	/**
+
+    //TODO: 回显修改的user的信息
+
+    @RequestMapping("update")
+    public Map<String,Integer> updateUser(@RequestBody User user){
+        Map<String,Integer> map = new HashMap<>();
+        try {
+            int flag = this.userService.updateUser(user);
+            if (flag == 1){
+                map.put("status", 200);
+            }else if (flag == 2){
+                map.put("status", 505);
+            }else{
+                map.put("status", 500);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("status", 500);
+        }
+        return map;
+    }
+
+
+    /**
 	 * 报表导出
 	 * @param page
 	 * @param rows
