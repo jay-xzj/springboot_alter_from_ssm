@@ -8,6 +8,8 @@ import com.sora.pojo.User;
 import com.sora.service.UserService;
 import com.sora.vo.DataGridResult;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ import sun.misc.Request;
 @Controller
 @RequestMapping("user")
 public class UserController {
+
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Value("${application.hello:Sora}")
 	private String name;
@@ -65,12 +69,6 @@ public class UserController {
 		return "user-add";
 	}
 
-    // 跳转到新增页面
-    @RequestMapping("user-modify")
-    public String toUserModify(){
-        return "user-modify";
-    }
-
 	@RequestMapping("save")
 	@ResponseBody
 	public Map<String,Integer> saveUser(User user){
@@ -112,19 +110,25 @@ public class UserController {
 		return map;
 	}
 
+	// 跳转到修改页面
+	@RequestMapping("user-modify")
+	public String toUserModify(){
+		return "user-modify";
+	}
+
     //TODO: 回显修改的user的信息
 
     @RequestMapping("update")
-    public Map<String,Integer> updateUser(@RequestBody User user){
+	@ResponseBody
+	public Map<String,Integer> updateUser(@RequestParam Long id){
         Map<String,Integer> map = new HashMap<>();
         try {
-            int flag = this.userService.updateUser(user);
+            int flag = this.userService.updateUser(id);
             if (flag == 1){
                 map.put("status", 200);
-            }else if (flag == 2){
-                map.put("status", 505);
             }else{
                 map.put("status", 500);
+                logger.info("修改失败");
             }
         } catch (Exception e) {
             e.printStackTrace();

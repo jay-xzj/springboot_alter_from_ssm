@@ -62,7 +62,7 @@ public class UserService {
 
 	}
 
-	public int updateUser(User user) {
-		return this.userMapper.updateUserById(user.getId());
+	public int updateUser(Long id) {
+		return this.userMapper.updateUserById(id);
 	}
 }

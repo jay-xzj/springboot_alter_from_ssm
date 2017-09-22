@@ -8,11 +8,12 @@
     <script type="text/javascript" src="/js/jquery-easyui-1.4/jquery.min.js"></script>
     <script type="text/javascript" src="/js/jquery-easyui-1.4/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="/js/jquery-easyui-1.4/locale/easyui-lang-zh_CN.js"></script>
-    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/common2.js"></script>
+    <script type="text/javascript" src="/js/json2.js"></script>
 </head>
 <body>
 <div>
-    <table class="easyui-datagrid" id="userList" title="会员列表"
+    <table id="userList" class="easyui-datagrid"  title="会员列表"
            data-options="singleSelect:false,collapsible:true,pagination:true,url:'/user/list',method:'post',pageSize:5,toolbar:toolbar,pageList:[2,5,10]">
         <thead>
         <tr>
@@ -33,8 +34,8 @@
            data-options="modal:true,closed:true,iconCls:'icon-save',href:'/page/user-add'" style="width:500px;height:390px;padding:10px;">
     The window content.
 </div>
-<div id="userModify" class="easyui-window" title="修改会员信息"
-     data-options="modal:true,closed:true,iconCls:'icon-save',href:'/page/user-modify'" style="width:500px;height:390px;padding:10px;">
+<div id="userEditWindow" class="easyui-window" title="修改会员信息"
+     data-options="modal:true,closed:true,iconCls:'icon-save',href:'/page/user-modify" style="width:700px;height:490px;padding:20px;">
     The window content.
 </div>
 <script type="text/javascript">
@@ -65,6 +66,13 @@
         ids = ids.join(",");
         return ids;
     }
+
+    function getSelectedUsers(){
+        var userList = $("#userList");
+        var user = userList.datagrid("getSelected");
+        return user;
+    }
+
     var toolbar = [{
         text:'新增',
         iconCls:'icon-add',
@@ -75,7 +83,52 @@
         text:'编辑',
         iconCls:'icon-edit',
         handler:function(){
-            $('#userModify').window('open');
+            var ids = getSelectionsIds();
+            if(ids.length == 0){
+                $.messager.alert('提示','必须选择一条记录才能编辑!');
+                return ;
+            }
+            if(ids.indexOf(',') > 0){
+                $.messager.alert('提示','只能选择一条记录!');
+                return ;
+            }
+
+            $("#userEditWindow").window({
+                onLoad :function(){//当页面加载完成之后执行回显
+                    //回显数据
+                    var data = $("#itemList").datagrid("getSelections")[0];
+                    $("#userEditForm").form("load",data);
+
+                    //。。。。
+                    $.getJSON('/user/query/'+data.id,function(_data){
+                        if(_data && _data.status == 200 && _data.data && _data.data.paramData){
+                            $("#userEditForm .params").show();
+                            $("#userEditForm [name=userParams]").val(_data.data.paramData);
+                            $("#userEditForm [name=userParamId]").val(_data.data.id);
+
+                            //回显商品规格
+                            var paramData = JSON.parse(_data.data.paramData);
+
+                            var html = "<ul>";
+                            for(var i in paramData){
+                                var pd = paramData[i];
+                                html+="<li><table>";
+                                html+="<tr><td colspan=\"2\" class=\"group\">"+pd.group+"</td></tr>";
+
+                                for(var j in pd.params){
+                                    var ps = pd.params[j];
+                                    html+="<tr><td class=\"param\"><span>"+ps.k+"</span>: </td><td><input autocomplete=\"off\" type=\"text\" value='"+ps.v+"'/></td></tr>";
+                                }
+
+                                html+="</li></table>";
+                            }
+                            html+= "</ul>";
+                            $("#userEditForm .params td").eq(1).html(html);
+                        }
+                    });
+
+                }
+            }).window("open");
         }
     },{
         text:'删除',

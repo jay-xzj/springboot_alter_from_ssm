@@ -63,4 +63,20 @@
         );
     </insert>
 
+    <update id="updateUserById" parameterType="com.sora.pojo.User">
+        UPDATE tb_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="srcId!=null">id=#{id},</if>
+            <if test="srcType!=null">user_name=#{userName},</if>
+            <if test="destId!=null">password=#{password},</if>
+            <if test="destType!=null">name=#{name},</if>
+            <if test="relType!=null">age=#{age},</if>
+            <if test="status!=null">sex=#{sex},</if>
+            <if test="snId!=null">birthday=#{birthday},</if>
+            <if test="status!=null">created=#{created},</if>
+            <if test="snId!=null">updated=NOW(),</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
 </mapper>
